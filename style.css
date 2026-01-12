@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)
+    ),
+    url("https://img.freepik.com/fotos-premium/fundo-do-teste-padrao-do-campo-de-grama-verde-para-o-futebol-e-o-futebol_64749-1974.jpg?semt=ais_hybrid&w=740&q=80") center/cover no-repeat;
+
+    font-family: Arial, sans-serif;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: rgba(0, 80, 0, 0.85);
+    padding: 40px;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 8px;
+    border: 2px solid #ffffff;
+}
+
+h1 {
+    color: #00ff66;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.aviso {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.promessa {
+    font-size: 15px;
+    margin-bottom: 25px;
+    color: #e0e0e0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #004d1a;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 4px;
+}
