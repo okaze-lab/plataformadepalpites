@@ -1,72 +1,120 @@
+:root {
+  --green: #00ff66;
+  --green-dark: rgba(0, 80, 0, 0.86);
+  --black-overlay: rgba(0, 0, 0, 0.72);
+  --white: #ffffff;
+  --text-muted: #e0e0e0;
+
+  --radius: 10px;
+  --border: 2px;
+  --space-1: 10px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 40px;
+
+  --max-width: 520px;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    height: 100vh;
-    background: linear-gradient(
-        rgba(0, 0, 0, 0.7),
-        rgba(0, 0, 0, 0.7)
-    ),
-    url("https://img.freepik.com/fotos-premium/fundo-do-teste-padrao-do-campo-de-grama-verde-para-o-futebol-e-o-futebol_64749-1974.jpg?semt=ais_hybrid&w=740&q=80") center/cover no-repeat;
+  min-height: 100svh;
+  font-family: Arial, sans-serif;
+  color: var(--white);
 
-    font-family: Arial, sans-serif;
-    color: white;
+  background:
+    linear-gradient(var(--black-overlay), var(--black-overlay)),
+    url("https://img.freepik.com/fotos-premium/fundo-do-teste-padrao-do-campo-de-grama-verde-para-o-futebol-e-o-futebol_64749-1974.jpg?semt=ais_hybrid&w=740&q=80")
+    center / cover no-repeat;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: grid;
+  place-items: center;
+  padding: var(--space-3);
 }
 
-.container {
-    background-color: rgba(0, 80, 0, 0.85);
-    padding: 40px;
-    max-width: 500px;
-    text-align: center;
-    border-radius: 8px;
-    border: 2px solid #ffffff;
+.page {
+  width: 100%;
+  display: grid;
+  place-items: center;
 }
 
-h1 {
-    color: #00ff66;
-    margin-bottom: 20px;
-    font-size: 28px;
+.card {
+  width: min(100%, var(--max-width));
+  background: var(--green-dark);
+  border: var(--border) solid var(--white);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  text-align: center;
 }
 
-.aviso {
-    font-size: 16px;
-    margin-bottom: 15px;
+.title {
+  color: var(--green);
+  font-size: 28px;
+  margin-bottom: var(--space-3);
 }
 
-.promessa {
-    font-size: 15px;
-    margin-bottom: 25px;
-    color: #e0e0e0;
+.text {
+  font-size: 16px;
+  margin-bottom: var(--space-2);
 }
 
-.tag {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #ffffff;
-    color: #004d1a;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 12px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
+.text-muted {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
 }
 
-.tag:hover {
-    background-color: #00ff66;
-    color: #003300;
+.badge-button {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+
+  background: var(--white);
+  color: #004d1a;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  cursor: pointer;
+  transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
 }
 
-.mensagem {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #ffffff;
+.badge-button:hover {
+  background: var(--green);
+  color: #003300;
+  transform: translateY(-1px);
 }
 
+.badge-button:active {
+  transform: translateY(0);
+}
+
+.badge-button:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+}
+
+.message {
+  margin-top: var(--space-3);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 420px) {
+  .card {
+    padding: 28px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}

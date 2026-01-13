@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma em Lançamento</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma em Lançamento</title>
+  <meta name="description" content="Plataforma de palpites e interação com o futebol. Lançamento em breve.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <main class="page">
+    <section class="card" aria-labelledby="titulo">
+      <h1 id="titulo" class="title">Estamos entrando em campo</h1>
 
-    <div class="container">
-        <h1>Estamos entrando em campo</h1>
+      <p class="text">
+        Uma nova plataforma de palpites, estatísticas e interação com o futebol está chegando.
+      </p>
 
-        <p class="aviso">
-            Uma nova plataforma de palpites, estatísticas e interação com o futebol está chegando.
-        </p>
+      <p class="text text-muted">
+        Em breve, você poderá acompanhar jogos, dar seus palpites e disputar posições em rankings semanais.
+      </p>
 
-        <p class="promessa">
-            Em breve, você poderá acompanhar jogos, dar seus palpites e disputar posições em rankings semanais.
-        </p>
+      <button
+        class="badge-button"
+        id="botaoLancamento"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mensagemLancamento">
+        lançamento em breve
+      </button>
 
-        <button class="tag" id="botaoLancamento">
-    lançamento em breve
-</button>
+      <p id="mensagemLancamento" class="message is-hidden" role="status" aria-live="polite"></p>
+    </section>
+  </main>
 
-<p id="mensagem" class="mensagem"></p>
-        </span>
-    </div>
-
-<script src="script.js"></script>
-
+  <script src="script.js" defer></script>
 </body>
 </html>
