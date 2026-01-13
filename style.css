@@ -1,18 +1,24 @@
 :root {
   --green: #00ff66;
-  --green-dark: rgba(0, 80, 0, 0.86);
-  --black-overlay: rgba(0, 0, 0, 0.72);
-  --white: #ffffff;
-  --text-muted: #e0e0e0;
+  --green-dark: #0f3d2e;
 
-  --radius: 10px;
-  --border: 2px;
+  --black: #0b0b0b;
+  --black-2: #121212;
+  --overlay: rgba(0, 0, 0, 0.72);
+
+  --white: #ffffff;
+  --muted: #bfbfbf;
+
+  --radius: 14px;
+  --border: 1px;
+
   --space-1: 10px;
   --space-2: 16px;
   --space-3: 24px;
   --space-4: 40px;
 
-  --max-width: 520px;
+  --max-width: 560px;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -27,7 +33,8 @@ body {
   color: var(--white);
 
   background:
-    linear-gradient(var(--black-overlay), var(--black-overlay)),
+    radial-gradient(1200px 600px at 50% 20%, rgba(0, 255, 102, 0.12), transparent 60%),
+    linear-gradient(var(--overlay), var(--overlay)),
     url("https://img.freepik.com/fotos-premium/fundo-do-teste-padrao-do-campo-de-grama-verde-para-o-futebol-e-o-futebol_64749-1974.jpg?semt=ais_hybrid&w=740&q=80")
     center / cover no-repeat;
 
@@ -44,49 +51,100 @@ body {
 
 .card {
   width: min(100%, var(--max-width));
-  background: var(--green-dark);
-  border: var(--border) solid var(--white);
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.90), rgba(11, 11, 11, 0.88));
+  border: var(--border) solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius);
   padding: var(--space-4);
   text-align: center;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.brand {
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.brand-logo {
+  width: min(340px, 86%);
+  height: auto;
+  image-rendering: auto;
 }
 
 .title {
-  color: var(--green);
-  font-size: 28px;
-  margin-bottom: var(--space-3);
+  color: var(--white);
+  font-size: 26px;
+  line-height: 1.12;
+  letter-spacing: 0.2px;
+  margin-bottom: var(--space-2);
 }
 
 .text {
   font-size: 16px;
-  margin-bottom: var(--space-2);
-}
-
-.text-muted {
-  font-size: 15px;
-  color: var(--text-muted);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
   margin-bottom: var(--space-3);
 }
 
-.badge-button {
-  display: inline-block;
-  padding: 10px 18px;
-  border-radius: 6px;
-  border: none;
+.bullets {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 0 auto var(--space-3);
+  padding: 0;
+  max-width: 420px;
+  text-align: left;
+}
 
-  background: var(--white);
-  color: #004d1a;
-  font-weight: bold;
+.bullets li {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.bullets li::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  border-radius: 3px;
+  background: var(--green);
+  box-shadow: 0 0 0 3px rgba(0, 255, 102, 0.14);
+}
+
+.actions {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  margin-top: var(--space-2);
+}
+
+.badge-button {
+  width: 100%;
+  max-width: 360px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+
+  background: rgba(0, 255, 102, 0.16);
+  color: var(--white);
+
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.6px;
   font-size: 12px;
 
   cursor: pointer;
-  transition: transform 120ms ease, background-color 120ms ease, color 120ms ease;
+  transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease;
 }
 
 .badge-button:hover {
-  background: var(--green);
-  color: #003300;
+  background: rgba(0, 255, 102, 0.26);
+  border-color: rgba(0, 255, 102, 0.55);
   transform: translateY(-1px);
 }
 
@@ -95,18 +153,86 @@ body {
 }
 
 .badge-button:focus-visible {
-  outline: 3px solid var(--green);
+  outline: 3px solid rgba(0, 255, 102, 0.7);
+  outline-offset: 3px;
+}
+
+.link-ghost {
+  width: 100%;
+  max-width: 360px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+
+  transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+
+.link-ghost:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+.link-ghost:active {
+  transform: translateY(0);
+}
+
+.link-ghost:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.35);
   outline-offset: 3px;
 }
 
 .message {
   margin-top: var(--space-3);
+  padding: 14px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 102, 0.25);
+  background: rgba(0, 255, 102, 0.08);
+  color: rgba(255, 255, 255, 0.95);
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .is-hidden {
   display: none;
+}
+
+.footer {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+.footer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  letter-spacing: 0.3px;
+}
+
+.footer-muted {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  line-height: 1.4;
+  max-width: 440px;
 }
 
 @media (max-width: 420px) {
@@ -115,6 +241,17 @@ body {
   }
 
   .title {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .brand-logo {
+    width: min(280px, 92%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-button,
+  .link-ghost {
+    transition: none;
   }
 }

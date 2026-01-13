@@ -1,7 +1,7 @@
 const botao = document.getElementById("botaoLancamento");
 const mensagem = document.getElementById("mensagemLancamento");
 
-const TEXTO = "Estamos finalizando o desenvolvimento. Em breve abriremos para os primeiros usuários.";
+const TEXTO = "Estamos finalizando o Jogo da Vez. Em breve abriremos acesso para os primeiros usuários e rankings semanais.";
 
 function toggleMensagem() {
   const estaAberto = botao.getAttribute("aria-expanded") === "true";

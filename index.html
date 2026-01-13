@@ -1,35 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plataforma em Lançamento</title>
-  <meta name="description" content="Plataforma de palpites e interação com o futebol. Lançamento em breve.">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Jogo da Vez | Palpites, rankings e interação diária</title>
+  <meta name="description" content="Jogo da Vez: palpites, rankings e interação diária com futebol. Em breve, acesso para os primeiros usuários." />
+  <meta name="theme-color" content="#0B0B0B" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <main class="page">
-    <section class="card" aria-labelledby="titulo">
-      <h1 id="titulo" class="title">Estamos entrando em campo</h1>
+  <main class="page" aria-labelledby="titulo">
+    <section class="card">
+      <header class="brand">
+        <img
+          class="brand-logo"
+          src="assets/logo-full.png"
+          alt="Jogo da Vez"
+          loading="eager"
+          decoding="async"
+        />
+      </header>
+
+      <h1 id="titulo" class="title">O jogo muda. A vez é agora.</h1>
 
       <p class="text">
-        Uma nova plataforma de palpites, estatísticas e interação com o futebol está chegando.
+        Palpites, rankings e interação diária com futebol. Simples, rápido e viciante do jeito certo.
       </p>
 
-      <p class="text text-muted">
-        Em breve, você poderá acompanhar jogos, dar seus palpites e disputar posições em rankings semanais.
-      </p>
+      <ul class="bullets" aria-label="Destaques do produto">
+        <li>Jogo do dia (acesso diário)</li>
+        <li>Enquetes semanais</li>
+        <li>Ranking e gamificação</li>
+        <li>Conteúdo curto e recorrente</li>
+      </ul>
 
-      <button
-        class="badge-button"
-        id="botaoLancamento"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mensagemLancamento">
-        lançamento em breve
-      </button>
+      <div class="actions">
+        <button
+          class="badge-button"
+          id="botaoLancamento"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mensagemLancamento">
+          Acessar aviso de lançamento
+        </button>
+
+        <a class="link-ghost" href="#" aria-label="Entrar na lista de espera">
+          Entrar na lista de espera
+        </a>
+      </div>
 
       <p id="mensagemLancamento" class="message is-hidden" role="status" aria-live="polite"></p>
+
+      <footer class="footer">
+        <span class="footer-pill">Jogo da Vez</span>
+        <span class="footer-muted">Plataforma em construção. Sem promessas mágicas, só entrega.</span>
+      </footer>
     </section>
   </main>
 
