@@ -11,45 +11,44 @@ const TEXTO_LANCAMENTO =
 const TEXTO_CONFIRMADO = "interesse registrado ✓";
 
 const STORAGE_INTERESSE = "jogodavez_interesse";
-const STORAGE_CONTADOR_BASE = "jogodavez_contador_base";
-const STORAGE_CONTADOR_TOTAL = "jogodavez_contador_total";
+const STORAGE_EXTRA_CLIQUE = "jogodavez_extra_clique";
 
-const BASE_MIN = 90;
-const BASE_MAX = 160;
+const BASE_GLOBAL = 127;
+const INICIO_GLOBAL = "2026-01-01";
 
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function hoje() {
+  return new Date().toISOString().split("T")[0];
 }
 
-function getOrCreateBase() {
-  const salvo = Number(localStorage.getItem(STORAGE_CONTADOR_BASE));
-  if (Number.isFinite(salvo) && salvo > 0) return salvo;
-
-  const base = randomInt(BASE_MIN, BASE_MAX);
-  localStorage.setItem(STORAGE_CONTADOR_BASE, String(base));
-  return base;
+function diasDesdeInicio(inicio) {
+  const start = new Date(inicio + "T00:00:00");
+  const now = new Date(hoje() + "T00:00:00");
+  const diffMs = now.getTime() - start.getTime();
+  const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  return Math.max(0, dias);
 }
 
-function getOrCreateTotal() {
-  const salvo = Number(localStorage.getItem(STORAGE_CONTADOR_TOTAL));
-  if (Number.isFinite(salvo) && salvo > 0) return salvo;
-
-  const base = getOrCreateBase();
-  localStorage.setItem(STORAGE_CONTADOR_TOTAL, String(base));
-  return base;
+function getExtraClique() {
+  return localStorage.getItem(STORAGE_EXTRA_CLIQUE) === "1" ? 1 : 0;
 }
 
-function setTotal(n) {
-  localStorage.setItem(STORAGE_CONTADOR_TOTAL, String(n));
+function setExtraClique() {
+  localStorage.setItem(STORAGE_EXTRA_CLIQUE, "1");
+}
+
+function calcularTotal() {
+  const dias = diasDesdeInicio(INICIO_GLOBAL);
+  return BASE_GLOBAL + dias + getExtraClique();
 }
 
 function renderContador() {
-  const total = getOrCreateTotal();
+  const total = calcularTotal();
   contadorEl.innerHTML = `<b>${total}</b> pessoas na lista de espera`;
 }
 
 function mostrarStatusLista() {
-  statusListaEl.innerHTML = `<b>Você está na lista.</b> Em breve liberamos o primeiro Jogo do Dia e as enquetes semanais.`;
+  statusListaEl.innerHTML =
+    "<b>Você está na lista.</b> Em breve liberamos o primeiro Jogo do Dia e as enquetes semanais.";
   statusListaEl.classList.remove("is-hidden");
 }
 
@@ -76,7 +75,7 @@ function toggleMensagem() {
 
 botaoLancamento.addEventListener("click", toggleMensagem);
 
-/* Botão 2: lista de espera (salva, trava, incrementa contador, mostra status) */
+/* Botão 2: lista de espera (salva, trava, incrementa +1 local) */
 function aplicarEstadoConfirmado() {
   botaoLista.textContent = TEXTO_CONFIRMADO;
   botaoLista.classList.add("confirmado");
@@ -86,14 +85,10 @@ function aplicarEstadoConfirmado() {
 
 function registrarInteresse(e) {
   e.preventDefault();
-
   if (localStorage.getItem(STORAGE_INTERESSE)) return;
 
   localStorage.setItem(STORAGE_INTERESSE, "true");
-
-  const atual = getOrCreateTotal();
-  const novoTotal = atual + 1;
-  setTotal(novoTotal);
+  setExtraClique();
 
   aplicarEstadoConfirmado();
   renderContador();
@@ -105,14 +100,6 @@ function init() {
 
   if (localStorage.getItem(STORAGE_INTERESSE)) {
     aplicarEstadoConfirmado();
-
-    const base = getOrCreateBase();
-    const total = getOrCreateTotal();
-    if (total <= base) {
-      setTotal(base + 1);
-    }
-
-    renderContador();
     mostrarStatusLista();
   } else {
     esconderStatusLista();
