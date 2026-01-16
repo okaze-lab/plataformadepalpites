@@ -196,7 +196,7 @@ function normalizarPercentuais(contagens) {
   return { casa: res[0], empate: res[1], fora: res[2] };
 }
 
-function calcularPoll() {
+function calcularPollCounts() {
   const base = basePollDoDia();
   const extras = getPollExtras();
 
@@ -204,7 +204,17 @@ function calcularPoll() {
   const empateCount = Math.max(0, base.empate + extras.empate);
   const foraCount = Math.max(0, base.fora + extras.fora);
 
+  return { casaCount, empateCount, foraCount };
+}
+
+function calcularPoll() {
+  const { casaCount, empateCount, foraCount } = calcularPollCounts();
   return normalizarPercentuais([casaCount, empateCount, foraCount]);
+}
+
+function totalVotosPoll() {
+  const { casaCount, empateCount, foraCount } = calcularPollCounts();
+  return casaCount + empateCount + foraCount;
 }
 
 function renderPoll() {
@@ -217,12 +227,20 @@ function renderPoll() {
   pctCasa.textContent = r.casa + "%";
   pctEmpate.textContent = r.empate + "%";
   pctFora.textContent = r.fora + "%";
+
+  const total = totalVotosPoll();
+  pollFeedback.dataset.total = String(total);
 }
 
 function labelVoto(v) {
   if (v === "casa") return "Vitória Casa";
   if (v === "empate") return "Empate";
   return "Vitória Visitante";
+}
+
+function textoTotalVotos() {
+  const total = totalVotosPoll();
+  return total === 1 ? "1 voto registrado" : total + " votos registrados";
 }
 
 function bloquearPoll(voto) {
@@ -253,7 +271,7 @@ function votar(opcao) {
   extras[opcao] = (extras[opcao] || 0) + 1;
   setPollExtras(extras);
 
-  pollFeedback.textContent = "Registramos seu palpite: " + labelVoto(opcao) + ".";
+  pollFeedback.textContent = "Registramos seu palpite: " + labelVoto(opcao) + ". " + textoTotalVotos() + ".";
   bloquearPoll(opcao);
   renderPoll();
 }
@@ -268,7 +286,7 @@ function redefinirEscolha() {
   extras[votoAnterior] = Math.max(0, (extras[votoAnterior] || 0) - 1);
   setPollExtras(extras);
 
-  pollFeedback.textContent = "Escolha uma opção para registrar seu palpite.";
+  pollFeedback.textContent = "Escolha uma opção para registrar seu palpite. " + textoTotalVotos() + ".";
   liberarPoll();
   renderPoll();
 }
@@ -278,10 +296,10 @@ function initPoll() {
 
   const jaVotou = localStorage.getItem(STORAGE_POLL_VOTO);
   if (jaVotou) {
-    pollFeedback.textContent = "Seu palpite está registrado: " + labelVoto(jaVotou) + ".";
+    pollFeedback.textContent = "Seu palpite está registrado: " + labelVoto(jaVotou) + ". " + textoTotalVotos() + ".";
     bloquearPoll(jaVotou);
   } else {
-    pollFeedback.textContent = "Escolha uma opção para registrar seu palpite.";
+    pollFeedback.textContent = "Escolha uma opção para registrar seu palpite. " + textoTotalVotos() + ".";
     liberarPoll();
   }
 
